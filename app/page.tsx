@@ -1,53 +1,53 @@
 "use client";
 
 import React from "react";
-import { Code, Zap, Server, RefreshCw, Layers, Home } from "lucide-react";
+import { Code, Zap, Server, RefreshCw, Layers } from "lucide-react";
 
 const renderStrategies = [
     {
       name: 'CSR',
       icon: <Code className="w-6 h-6 text-orange-600" />,
       color: 'bg-orange-100',
-      description: 'Client-Side Rendering - Məlumatlar brauzerdə yüklənir',
-      seo: 'Zəif',
-      performance: 'Yavaş',
-      useCase: 'Dashboard, Admin'
+      description: 'Client-Side Rendering – HTML kabuğu serverdən gəlir, data brauzerdə fetch olunur və komponentlər hydration sonrası interaktiv olur.',
+      seo: 'Məhdud',
+      performance: 'İlkin yükləmə daha yavaş, interaktivlik sürətli',
+      useCase: 'Dashboard, Admin, Auth tələb edən səhifələr'
     },
     {
       name: 'SSR',
       icon: <Server className="w-6 h-6 text-blue-600" />,
       color: 'bg-blue-100',
-      description: 'Server-Side Rendering - Hər sorğuda serverdə render',
+      description: 'Server-Side Rendering – Hər sorğuda serverdən tam HTML render olunur, brauzer qəbul edəndə artıq məzmun hazırdır.',
       seo: 'Mükəmməl',
-      performance: 'Sürətli',
-      useCase: 'Profillər, Sosial Media'
+      performance: 'Daimi təzə data, TTFB arta bilər',
+      useCase: 'Profillər, real-vaxt yaxın kontent, fərdiləşmiş səhifələr'
     },
     {
       name: 'SSG',
       icon: <Zap className="w-6 h-6 text-green-600" />,
       color: 'bg-green-100',
-      description: 'Static Site Generation - Build zamanı yaradılır',
+      description: 'Static Site Generation – Səhifələr build zamanı öncədən yaradılır və CDN-dən statik fayl kimi verilir.',
       seo: 'Mükəmməl',
-      performance: 'Çox Sürətli',
-      useCase: 'Bloq, Sənədləşdirmə'
+      performance: 'Çox sürətli (TTFB/FCP əla)',
+      useCase: 'Bloq, sənədləşdirmə, dəyişməyən marketinq səhifələri'
     },
     {
       name: 'ISR',
       icon: <RefreshCw className="w-6 h-6 text-purple-600" />,
       color: 'bg-purple-100',
-      description: 'Incremental Static Regeneration - Avtomatik yenilənmə',
+      description: 'Incremental Static Regeneration – SSG səhifələri arxa planda təyin etdiyiniz intervalda yenilənir.',
       seo: 'Mükəmməl',
-      performance: 'Çox Sürətli',
-      useCase: 'E-ticarət, Xəbərlər'
+      performance: 'Çox sürətli (CDN), data periodik yenilənir',
+      useCase: 'E-ticarət kataloqu, xəbərlər, dinamik bloq'
     },
     {
       name: 'PPR',
       icon: <Layers className="w-6 h-6 text-cyan-600" />,
       color: 'bg-cyan-100',
-      description: 'Partial Prerendering - Statik + Dinamik hibrid',
+      description: 'Partial Prerendering – Səhifənin statik «kabuğu» əvvəlcədən verilir, məzmunun dinamik hissələri Suspense ilə hissə-hissə yüklənir.',
       seo: 'Mükəmməl',
-      performance: 'Çox Sürətli',
-      useCase: 'Kompleks Səhifələr'
+      performance: 'Hibrid: ilkin görüntü dərhal, dinamik hissə sonradan',
+      useCase: 'Kompleks landinqlər, qarışıq statik+dinamik səhifələr'
     }
   ];
 
@@ -76,13 +76,13 @@ const renderStrategies = [
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-sm">
                   <span className="font-semibold">SEO:</span>
-                  <span className={strategy.seo === 'Mükəmməl' ? 'text-green-600' : strategy.seo === 'Zəif' ? 'text-red-600' : 'text-yellow-600'}>
+                  <span className={strategy.seo === 'Mükəmməl' ? 'text-green-600' : strategy.seo === 'Məhdud' ? 'text-yellow-600' : 'text-red-600'}>
                     {strategy.seo}
                   </span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <span className="font-semibold">Performans:</span>
-                  <span className={strategy.performance === 'Çox Sürətli' ? 'text-green-600' : strategy.performance === 'Sürətli' ? 'text-blue-600' : 'text-yellow-600'}>
+                  <span className={strategy.performance.includes('Çox') || strategy.performance.includes('çox') ? 'text-green-600' : strategy.performance.includes('sürətli') ? 'text-blue-600' : 'text-yellow-600'}>
                     {strategy.performance}
                   </span>
                 </div>
